@@ -10,4 +10,6 @@ module com.example.proiectingineriaprogramelor {
 
     opens com.example.proiectingineriaprogramelor to javafx.fxml;
     exports com.example.proiectingineriaprogramelor;
+    exports com.example.proiectingineriaprogramelor.controllers;
+    opens com.example.proiectingineriaprogramelor.controllers to javafx.fxml;
 }

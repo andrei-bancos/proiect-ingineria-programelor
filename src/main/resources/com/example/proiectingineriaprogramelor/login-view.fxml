@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proiectingineriaprogramelor.controllers.LoginController">
+  <padding>
+    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+  </padding>
+  <children>
+    <Label text="Aplicație medicală">
+      <font>
+        <Font size="23.0" />
+      </font>
+    </Label>
+    <Label text="LOGIN" textFill="#fb4545">
+      <font>
+        <Font name="System Bold" size="30.0" />
+      </font>
+      <VBox.margin>
+        <Insets bottom="40.0" />
+      </VBox.margin></Label>
+    <TextField fx:id="emailAddressField" maxHeight="40.0" maxWidth="300.0" prefHeight="40.0" prefWidth="300.0" promptText="Email address" style="-fx-background-color: #ddd; -fx-prompt-text-fill: #333; -fx-background-radius: 10;" VBox.vgrow="NEVER">
+      <VBox.margin>
+        <Insets bottom="20.0" />
+      </VBox.margin>
+      <font>
+        <Font size="14.0" />
+      </font>
+    </TextField>
+    <PasswordField fx:id="passwordField" maxHeight="40.0" maxWidth="300.0" prefHeight="40.0" prefWidth="300.0" promptText="Password" style="-fx-background-color: #ddd; -fx-prompt-text-fill: #333; -fx-background-radius: 10;">
+      <font>
+        <Font size="14.0" />
+      </font>
+    </PasswordField>
+    <Hyperlink text="Resetare parolă" textFill="#111111" underline="true">
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <VBox.margin>
+        <Insets bottom="40.0" top="20.0" />
+      </VBox.margin>
+      <font>
+        <Font size="14.0" />
+      </font>
+    </Hyperlink>
+    <Label fx:id="error" managed="false" textFill="#fb4545" visible="false">
+      <VBox.margin>
+        <Insets bottom="20.0" />
+      </VBox.margin>
+      <font>
+        <Font size="14.0" />
+      </font>
+    </Label>
+    <Button fx:id="login" mnemonicParsing="false" onMouseClicked="#onLoginButtonClick" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #111111; -fx-background-radius: 10; -fx-cursor: hand;" text="LOGIN" textFill="WHITE">
+      <VBox.margin>
+        <Insets />
+      </VBox.margin>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <font>
+        <Font size="14.0" />
+      </font>
+    </Button>
+  </children>
+</VBox>
