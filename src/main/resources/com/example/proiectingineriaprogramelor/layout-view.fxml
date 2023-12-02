@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="containerVBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="796.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proiectingineriaprogramelor.controllers.LayoutController">
+    <children>
+        <HBox alignment="CENTER_LEFT" maxHeight="100.0" minHeight="100.0" prefHeight="100.0" spacing="20.0" style="-fx-background-color: #fff;">
+            <children>
+                <Label fx:id="acasaLabel" layoutX="60.0" layoutY="48.0" onMouseClicked="#onHomeLabelClick" text="Acasă" textFill="#fb4545">
+                    <font>
+                        <Font name="System Bold" size="20.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Label>
+                <Label fx:id="pacientLabel" layoutX="113.0" layoutY="48.0" onMouseClicked="#onPacientLabelClick" text="Pacienți">
+                    <font>
+                        <Font name="System Bold" size="20.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Label>
+                <Label fx:id="programariLabel" layoutX="166.0" layoutY="48.0" onMouseClicked="#onProgramariLabelClick" text="Programări">
+                    <font>
+                        <Font name="System Bold" size="20.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Label>
+                <Label fx:id="setariLabel" layoutX="187.0" layoutY="48.0" onMouseClicked="#onSetariLabelClick" text="Setări">
+                    <font>
+                        <Font name="System Bold" size="20.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Label>
+                <Region prefHeight="100.0" HBox.hgrow="ALWAYS" />
+                <VBox alignment="CENTER_RIGHT">
+                    <children>
+                        <Label text="Dr. [nume]">
+                            <font>
+                                <Font size="16.0" />
+                            </font></Label>
+                        <Hyperlink fx:id="logoutLink" onMouseClicked="#logout" text="Logout" textFill="#fb4545" underline="true">
+                            <font>
+                                <Font size="14.0" />
+                            </font></Hyperlink>
+                    </children>
+                </VBox>
+            </children>
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
+            <padding>
+                <Insets left="50.0" right="50.0" />
+            </padding>
+        </HBox>
+    </children>
+</VBox>

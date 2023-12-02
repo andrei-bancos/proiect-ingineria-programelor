@@ -7,18 +7,20 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HomeScreen {
+public class LayoutScreen {
 
     private final Stage currentStage;
 
-    public HomeScreen(Stage currentStage) {
+    public LayoutScreen(Stage currentStage) {
         this.currentStage = currentStage;
     }
 
     public void show() throws IOException {
-        FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("home-view.fxml"));
-        Scene homeScene = new Scene(loader.load(), 800, 500);
-        currentStage.setTitle("Acasă");
-        currentStage.setScene(homeScene);
+        FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("layout-view.fxml"));
+        Scene layoutScene = new Scene(loader.load(), 800, 500);
+
+        currentStage.setTitle("Medical application");
+        currentStage.setScene(layoutScene);
+
     }
 }

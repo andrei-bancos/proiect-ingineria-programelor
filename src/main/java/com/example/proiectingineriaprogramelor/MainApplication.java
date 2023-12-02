@@ -16,6 +16,10 @@ public class MainApplication extends Application {
                                           .getResourceAsStream("/images/logo.png")));
         stage.getIcons().add(applicationIcon);
 
+        // min width and height for all screens
+        stage.setMinWidth(800);
+        stage.setMinHeight(500);
+
         LoginScreen loginScreen = new LoginScreen(stage);
         loginScreen.show();
     }
