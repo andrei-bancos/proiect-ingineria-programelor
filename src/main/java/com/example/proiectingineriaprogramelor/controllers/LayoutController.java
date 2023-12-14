@@ -13,6 +13,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -84,11 +85,11 @@ public class LayoutController implements Initializable {
         changeSelectedNavLabel(pacientLabel);
     }
 
-    @FXML
-    public void onProgramariLabelClick() {
-        containerVBox.getChildren().remove(currentContent);
-        changeSelectedNavLabel(programariLabel);
-    }
+//    @FXML
+//    public void onProgramariLabelClick() {
+//        containerVBox.getChildren().remove(currentContent);
+//        changeSelectedNavLabel(programariLabel);
+//    }
 
     @FXML
     public void onSetariLabelClick() {
@@ -103,4 +104,66 @@ public class LayoutController implements Initializable {
         LoginScreen loginScreen = new LoginScreen(currentStage);
         loginScreen.show();
     }
+
+    // Adăugați această metodă în LayoutController pentru a deschide fereastra Adaugă Programare
+    @FXML
+    public void onAdaugaProgramareLabelClick() {
+        try {
+            FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("AdaugaProgramareView.fxml"));
+            Parent adaugaProgramareView = loader.load();
+
+            Stage adaugaProgramareStage = new Stage();
+            adaugaProgramareStage.initModality(Modality.APPLICATION_MODAL);
+            adaugaProgramareStage.setTitle("Adaugă Programare");
+            adaugaProgramareStage.setScene(new Scene(adaugaProgramareView));
+
+            adaugaProgramareStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Adăugați această metodă în LayoutController pentru a deschide fereastra Vizualizează Programări
+    @FXML
+    public void onVizualizeazaProgramariLabelClick() {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("VizualizeazaProgramariView.fxml"));
+            Parent vizualizeazaProgramariView = loader.load();
+
+            Stage vizualizeazaProgramariStage = new Stage();
+            vizualizeazaProgramariStage.initModality(Modality.APPLICATION_MODAL);
+            vizualizeazaProgramariStage.setTitle("Vizualizează Programări");
+            vizualizeazaProgramariStage.setScene(new Scene(vizualizeazaProgramariView));
+
+            // Aici puteți adăuga cod pentru a popula TableView cu datele programărilor din baza de date
+
+            vizualizeazaProgramariStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    public void onProgramariLabelClick() {
+        try {
+            containerVBox.getChildren().remove(currentContent);
+            changeSelectedNavLabel(programariLabel);
+
+            FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("VizualizeazaProgramariView.fxml"));
+            Parent vizualizeazaProgramariView = loader.load();
+
+            // Setează controllerul pentru VizualizeazaProgramariView, dacă este necesar
+            // VizualizeazaProgramariController controller = loader.getController();
+            // controller.setSomeData(data); // Dacă aveți nevoie să trimiteți date către controller
+
+            currentContent = vizualizeazaProgramariView;
+            containerVBox.getChildren().add(currentContent);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 }
