@@ -17,7 +17,7 @@ public class UserRepository {
 
     public User getUser(int userId) {
         try {
-            String sql = "SELECT * FROM users WHERE Id = ?";
+            String sql = " SELECT * FROM users WHERE Id = ? ";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -36,6 +36,36 @@ public class UserRepository {
             e.printStackTrace();
         }
         return null;
+    }
+    public int checkUser(String Email) {
+        try {
+            String sql = "SELECT * FROM users WHERE Email = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, Email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()) {
+               return Integer.parseInt(resultSet.getString("Id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public boolean checkPassword(String Parola, int Id) {
+        try {
+            String sql = "SELECT * FROM users WHERE Parola = ? and Id = ? ";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, Parola);
+            preparedStatement.setInt(2, Id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public List<User> getAllUsers() {
