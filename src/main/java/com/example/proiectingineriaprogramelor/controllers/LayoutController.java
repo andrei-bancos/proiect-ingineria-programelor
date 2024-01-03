@@ -38,14 +38,17 @@ public class LayoutController implements Initializable {
     private Parent currentContent;
     private Parent homeContent;
     private Parent settingsContent;
+    private Parent pacientContent;
     private final FXMLLoader homeLoader = new FXMLLoader(MainApplication.class.getResource("home-view.fxml"));
     private final FXMLLoader settingsLoader = new FXMLLoader(MainApplication.class.getResource("settings-view.fxml"));
+    private final FXMLLoader pacientLoader = new FXMLLoader(MainApplication.class.getResource("pacienti-view.fxml"));
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             // load all screen content
             homeContent = homeLoader.load();
             settingsContent = settingsLoader.load();
+            pacientContent = pacientLoader.load();
 
             // set default content view
             currentContent = homeContent;
@@ -54,6 +57,7 @@ public class LayoutController implements Initializable {
             // set vertical grow for contents
             containerVBox.setVgrow(homeContent, Priority.ALWAYS);
             containerVBox.setVgrow(settingsContent, Priority.ALWAYS);
+            containerVBox.setVgrow(pacientContent, Priority.ALWAYS);
 
             containerVBox.getChildren().add(currentContent);
         } catch (Exception exception) {
@@ -79,11 +83,11 @@ public class LayoutController implements Initializable {
         changeSelectedNavLabel(acasaLabel);
     }
 
-    @FXML
-    public void onPacientLabelClick() {
-        containerVBox.getChildren().remove(currentContent);
-        changeSelectedNavLabel(pacientLabel);
-    }
+   // @FXML
+//  public void onPacientLabelClick() {
+//     containerVBox.getChildren().remove(currentContent);
+//     changeSelectedNavLabel(pacientLabel);
+//  }
 
 //    @FXML
 //    public void onProgramariLabelClick() {
@@ -157,6 +161,21 @@ public class LayoutController implements Initializable {
             // controller.setSomeData(data); // Dacă aveți nevoie să trimiteți date către controller
 
             currentContent = vizualizeazaProgramariView;
+            containerVBox.getChildren().add(currentContent);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    public void onPacientLabelClick() {
+        try {
+            containerVBox.getChildren().remove(currentContent);
+            changeSelectedNavLabel(pacientLabel);
+
+            FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("pacienti-view.fxml"));
+            Parent pacientContent = loader.load();
+            currentContent = pacientContent;
             containerVBox.getChildren().add(currentContent);
 
         } catch (IOException e) {
