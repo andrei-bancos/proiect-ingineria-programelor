@@ -35,20 +35,9 @@
         <Font size="14.0" />
       </font>
     </PasswordField>
-    <Hyperlink text="Resetare parolă" textFill="#111111" underline="true">
-      <opaqueInsets>
-        <Insets />
-      </opaqueInsets>
-      <VBox.margin>
-        <Insets bottom="40.0" top="20.0" />
-      </VBox.margin>
-      <font>
-        <Font size="14.0" />
-      </font>
-    </Hyperlink>
     <Label fx:id="error" managed="false" textFill="#fb4545" visible="false">
       <VBox.margin>
-        <Insets bottom="20.0" />
+        <Insets top="10.0" />
       </VBox.margin>
       <font>
         <Font size="14.0" />
@@ -56,7 +45,7 @@
     </Label>
     <Button fx:id="login" mnemonicParsing="false" onMouseClicked="#onLoginButtonClick" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #111111; -fx-background-radius: 10; -fx-cursor: hand;" text="LOGIN" textFill="WHITE">
       <VBox.margin>
-        <Insets />
+        <Insets top="30.0" />
       </VBox.margin>
       <opaqueInsets>
         <Insets />

@@ -1,5 +1,7 @@
 package com.example.proiectingineriaprogramelor.controllers;
 
+import com.example.proiectingineriaprogramelor.PasswordManager;
+import com.example.proiectingineriaprogramelor.repositories.UserRepository;
 import com.example.proiectingineriaprogramelor.screens.LayoutScreen;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -55,19 +57,31 @@ public class LoginController implements Initializable {
     protected void onLoginButtonClick() throws IOException {
         error.setVisible(true);
         error.setManaged(true);
+        String Email = emailAddressField.getText();
+        String Parola = passwordField.getText();
 
         if(Objects.equals(emailAddressField.getText().trim(), "")
            || Objects.equals(passwordField.getText().trim(), "")) {
-            error.setText("Introdu datele cerute");
+            error.setText("Introduceti datele cerute");
             return;
         }
+        else
+        {
+            UserRepository userRepository = new UserRepository();
+            int user_id = userRepository.checkUser(Email);
+            if(user_id >= 0){
+                PasswordManager passwordManager = new PasswordManager();
+                String HashParola = passwordManager.encryptSHA256(Parola);
+                if(userRepository.checkPassword(HashParola,user_id)){
+                    // get current stage
+                    Scene scene = login.getScene();
+                    Stage currentStage = (Stage) scene.getWindow();
 
-        // get current stage
-        Scene scene = login.getScene();
-        Stage currentStage = (Stage) scene.getWindow();
-
-        // show home screen
-        LayoutScreen layoutScreen = new LayoutScreen(currentStage);
-        layoutScreen.show();
+                    // show home screen
+                    LayoutScreen layoutScreen = new LayoutScreen(currentStage);
+                    layoutScreen.show();
+                }
+            } else error.setText("Datele introduse sunt gresite!");
+        }
     }
 }
