@@ -83,11 +83,11 @@ public class LayoutController implements Initializable {
         changeSelectedNavLabel(acasaLabel);
     }
 
-   // @FXML
-//  public void onPacientLabelClick() {
-//     containerVBox.getChildren().remove(currentContent);
-//     changeSelectedNavLabel(pacientLabel);
-//  }
+    // @FXML
+  public void onPacientLabelClick() {
+        changeCurrentContent(pacientContent);
+     changeSelectedNavLabel(pacientLabel);
+  }
 
 //    @FXML
 //    public void onProgramariLabelClick() {
@@ -147,6 +147,7 @@ public class LayoutController implements Initializable {
             e.printStackTrace();
         }
     }
+
     @FXML
     public void onProgramariLabelClick() {
         try {
@@ -167,22 +168,4 @@ public class LayoutController implements Initializable {
             e.printStackTrace();
         }
     }
-    @FXML
-    public void onPacientLabelClick() {
-        try {
-            containerVBox.getChildren().remove(currentContent);
-            changeSelectedNavLabel(pacientLabel);
-
-            FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("pacienti-view.fxml"));
-            Parent pacientContent = loader.load();
-            currentContent = pacientContent;
-            containerVBox.getChildren().add(currentContent);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
 }

@@ -1,49 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<ScrollPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
-   <content>
-      <VBox alignment="CENTER">
-         <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="64.0" prefWidth="665.0" text="Pacienți" textAlignment="JUSTIFY">
-               <font>
-                  <Font name="System Bold Italic" size="24.0" />
-               </font></Label>
-            <ToolBar>
-              <items>
-                <Button mnemonicParsing="false" text="Adaugă" />
-                  <Button mnemonicParsing="false" text="Modifică" />
-                  <Button mnemonicParsing="false" text="Șterge" textFill="#d40808" />
-                  <Button mnemonicParsing="false" text="Caută" />
-              </items>
-            </ToolBar>
-            <VBox alignment="CENTER">
-               <children>
-                  <Label text="Listă Pacienți">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <TableView>
+<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="486.0" prefWidth="938.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proiectingineriaprogramelor.controllers.PacientiController">
+    <content>
+        <VBox alignment="CENTER">
+            <children>
+                <Label text="Pacienți">
+                    <font>
+                        <Font name="System Bold" size="30.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="15.0" />
+                    </VBox.margin>
+                </Label>
+                <HBox alignment="CENTER" spacing="20.0">
+                    <children>
+                        <Button fx:id="addBtn" minHeight="30.0" mnemonicParsing="false" onMouseClicked="#onAddButtonClick" prefHeight="30.0" prefWidth="150.0" text="Adăugare">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="editBtn" minHeight="30.0" mnemonicParsing="false" onMouseClicked="#onEditButtonClick" prefHeight="30.0" prefWidth="150.0" text="Modificare">
+                            <HBox.margin>
+                                <Insets />
+                            </HBox.margin>
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="deleteBtn" minHeight="30.0" mnemonicParsing="false" onMouseClicked="#onDeleteButtonClick" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #fb4545;" text="Șterge" textFill="WHITE">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Button>
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="15.0" />
+                    </VBox.margin>
+                </HBox>
+                <TableView VBox.vgrow="ALWAYS">
                     <columns>
-                      <TableColumn prefWidth="116.33333837985992" text="CNP" />
-                      <TableColumn prefWidth="99.66670227050781" text="Nume" />
-                        <TableColumn prefWidth="90.99996948242188" text="Prenume" />
+                        <TableColumn prefWidth="75.0" text="CNP" />
+                        <TableColumn prefWidth="75.0" text="Nume" />
+                        <TableColumn prefWidth="75.0" text="Prenume" />
                         <TableColumn prefWidth="75.0" text="Sex" />
-                        <TableColumn prefWidth="83.33331298828125" text="Data nașterii" />
-                        <TableColumn prefWidth="75.0" text="Nr. card" />
-                        <TableColumn prefWidth="75.0" text="Asigurare" />
-                        <TableColumn prefWidth="89.0" text="Adresa" />
-                        <TableColumn prefWidth="94.00006103515625" text="Număr telefon" />
-                        <TableColumn prefWidth="75.0" text="Email" />
+                        <TableColumn prefWidth="109.60003662109375" text="Data nașteri" />
+                        <TableColumn prefWidth="107.199951171875" text="Asigurat" />
+                        <TableColumn prefWidth="95.199951171875" text="Numar card" />
+                        <TableColumn prefWidth="96.3333740234375" text="Grupa sanguina" />
+                        <TableColumn prefWidth="48.0" text="Adresa" />
+                        <TableColumn prefWidth="74.0" text="Nr telefon" />
+                        <TableColumn prefWidth="107.199951171875" text="Email" />
                     </columns>
-                  </TableView>
-               </children>
-            </VBox>
-         </children>
-      </VBox>
-   </content>
+                </TableView>
+            </children>
+        </VBox>
+    </content>
+    <padding>
+        <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
+    </padding>
 </ScrollPane>
