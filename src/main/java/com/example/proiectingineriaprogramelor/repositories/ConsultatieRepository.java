@@ -17,6 +17,7 @@ public class ConsultatieRepository {private final DatabaseConnection db = Databa
         List<Consultatie> listaConsultatie = new ArrayList<>();
         try {
             String sql = "SELECT * FROM Consultatii WHERE Id_pacient = ?";
+            //
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, pacientId);
             ResultSet resultSet = preparedStatement.executeQuery();
