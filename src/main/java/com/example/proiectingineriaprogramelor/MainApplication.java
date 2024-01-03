@@ -21,7 +21,7 @@ public class MainApplication extends Application {
         stage.setMinHeight(500);
 
 
-        System.out.println(PasswordManager.encryptSHA256("Popa"));
+        //System.out.println(PasswordManager.encryptSHA256("Popa"));
         LoginScreen loginScreen = new LoginScreen(stage);
         loginScreen.show();
     }

@@ -1,13 +1,11 @@
 package com.example.proiectingineriaprogramelor.repositories;
 
 import com.example.proiectingineriaprogramelor.DatabaseConnection;
+import com.example.proiectingineriaprogramelor.models.Alergie;
 import com.example.proiectingineriaprogramelor.models.User;
 import com.example.proiectingineriaprogramelor.models.Vaccin;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,14 +21,30 @@ public class VaccinRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Vaccin vaccin = new Vaccin();
+                Timestamp data= resultSet.getTimestamp("Data");
+
                 vaccin.setNume(resultSet.getString("Nume"));
-                vaccin.setData(resultSet.getDate("Data"));
+                vaccin.setData(data.toLocalDateTime());
                 listaVaccinuri.add(vaccin);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return listaVaccinuri;
+    }
+
+    public void addVaccin(Vaccin vaccin) {
+        try {
+            String sql = "INSERT INTO Vaccin (Id_pacient, Nume, Data) VALUE (?, ?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, vaccin.getIdPacient());
+            preparedStatement.setString(2, vaccin.getNume());
+            preparedStatement.setObject(3, vaccin.getData());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 

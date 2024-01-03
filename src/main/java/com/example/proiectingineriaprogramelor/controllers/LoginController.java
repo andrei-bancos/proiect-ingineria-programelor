@@ -81,7 +81,7 @@ public class LoginController implements Initializable {
                     LayoutScreen layoutScreen = new LayoutScreen(currentStage);
                     layoutScreen.show();
                 }
-            }
+            } else error.setText("Datele introduse sunt gresite!");
         }
     }
 }

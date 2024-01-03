@@ -1,5 +1,6 @@
 package com.example.proiectingineriaprogramelor.models;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Vaccin {
@@ -8,7 +9,7 @@ public class Vaccin {
     private String nume;
     private String descriere;
     private String tip;
-    private Date data;
+    private LocalDateTime data;
     private String observatii;
 
     public int getId() {
@@ -47,11 +48,11 @@ public class Vaccin {
         this.tip = tip;
     }
 
-    public Date getData() {
+    public LocalDateTime getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDateTime data) {
         this.data = data;
     }
 

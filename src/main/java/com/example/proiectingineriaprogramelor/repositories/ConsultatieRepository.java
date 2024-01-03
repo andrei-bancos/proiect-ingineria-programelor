@@ -33,4 +33,18 @@ public class ConsultatieRepository {private final DatabaseConnection db = Databa
         }
         return listaConsultatie;
     }
+
+    public void addConsultatie(Consultatie consultatie) {
+        try {
+            String sql = "INSERT INTO Antecedente (Id_pacient, Data, Diagnostic, Observatii) VALUE (?, ?, ?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, consultatie.getIdPacient());
+            preparedStatement.setObject(2, consultatie.getData());
+            preparedStatement.setString(3, consultatie.getDiagnostic());
+            preparedStatement.setString(4, consultatie.getObservatii());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

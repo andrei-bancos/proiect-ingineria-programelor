@@ -1,7 +1,9 @@
 package com.example.proiectingineriaprogramelor.repositories;
 
 import com.example.proiectingineriaprogramelor.DatabaseConnection;
+import com.example.proiectingineriaprogramelor.PasswordManager;
 import com.example.proiectingineriaprogramelor.models.Alergie;
+import com.example.proiectingineriaprogramelor.models.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -29,6 +31,17 @@ public class AlergieRepository {
             e.printStackTrace();
         }
         return listaAlergi;
+    }
+    public void addAlergie(Alergie alergie) {
+        try {
+            String sql = "INSERT INTO Alergie (Id_pacient, Alergie) VALUE (?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, alergie.getIdPacient());
+            preparedStatement.setString(2, alergie.getAlergie());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 
