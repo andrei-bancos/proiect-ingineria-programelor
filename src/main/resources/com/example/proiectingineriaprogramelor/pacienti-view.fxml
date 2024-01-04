@@ -42,19 +42,19 @@
                         <Insets bottom="15.0" />
                     </VBox.margin>
                 </HBox>
-                <TableView VBox.vgrow="ALWAYS">
+                <TableView fx:id="tableView" VBox.vgrow="ALWAYS">
                     <columns>
-                        <TableColumn prefWidth="75.0" text="CNP" />
-                        <TableColumn prefWidth="75.0" text="Nume" />
-                        <TableColumn prefWidth="75.0" text="Prenume" />
-                        <TableColumn prefWidth="75.0" text="Sex" />
-                        <TableColumn prefWidth="109.60003662109375" text="Data nașteri" />
-                        <TableColumn prefWidth="107.199951171875" text="Asigurat" />
-                        <TableColumn prefWidth="95.199951171875" text="Numar card" />
-                        <TableColumn prefWidth="96.3333740234375" text="Grupa sanguina" />
-                        <TableColumn prefWidth="48.0" text="Adresa" />
-                        <TableColumn prefWidth="74.0" text="Nr telefon" />
-                        <TableColumn prefWidth="107.199951171875" text="Email" />
+                        <TableColumn fx:id="cnpCol" prefWidth="75.0" text="CNP" />
+                        <TableColumn fx:id="numeCol" prefWidth="75.0" text="Nume" />
+                        <TableColumn fx:id="prenumeCol" prefWidth="75.0" text="Prenume" />
+                        <TableColumn fx:id="sexCol" prefWidth="75.0" text="Sex" />
+                        <TableColumn fx:id="dataNasteriCol" prefWidth="109.60003662109375" text="Data nașteri" />
+                        <TableColumn fx:id="asiguratCol" prefWidth="107.199951171875" text="Asigurat" />
+                        <TableColumn fx:id="nrCardCol" prefWidth="95.199951171875" text="Numar card" />
+                        <TableColumn fx:id="grupaSanguinaCol" prefWidth="96.3333740234375" text="Grupa sanguina" />
+                        <TableColumn fx:id="adresaCol" prefWidth="48.0" text="Adresa" />
+                        <TableColumn fx:id="nrTelCol" prefWidth="74.0" text="Nr telefon" />
+                        <TableColumn fx:id="emailCol" prefWidth="107.199951171875" text="Email" />
                     </columns>
                 </TableView>
             </children>
