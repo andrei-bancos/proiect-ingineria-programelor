@@ -14,6 +14,7 @@ public class Pacient {
     private String nr_card;
     private boolean asigurare;
     private String email;
+    private String adresa;
     private String nr_tel;
 
     public int getId() {
@@ -90,6 +91,14 @@ public class Pacient {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAdresa() {
+        return adresa;
+    }
+
+    public void setAdresa(String adresa) {
+        this.adresa = adresa;
     }
 
     public String getNr_tel() {

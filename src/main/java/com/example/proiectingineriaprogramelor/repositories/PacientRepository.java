@@ -2,15 +2,12 @@ package com.example.proiectingineriaprogramelor.repositories;
 
 import com.example.proiectingineriaprogramelor.DatabaseConnection;
 import com.example.proiectingineriaprogramelor.models.Pacient;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
 public class PacientRepository {
     private final DatabaseConnection db = DatabaseConnection.getInstance();
     private final Connection connection = db.getConnection();
-
     public List<Pacient> getPacienti() {
         try {
             List<Pacient> pacientiList = new ArrayList<>();
@@ -20,7 +17,6 @@ public class PacientRepository {
             while (resultSet.next()) {
                 Pacient pacient = new Pacient();
                 Timestamp dataNasteri = resultSet.getTimestamp("data_nasterii");
-
                 pacient.setNume(resultSet.getString("nume"));
                 pacient.setPrenume(resultSet.getString("prenume"));
                 pacient.setCnp(resultSet.getString("cnp"));
@@ -30,18 +26,16 @@ public class PacientRepository {
                 pacient.setNr_card(resultSet.getString("nr_card"));
                 pacient.setAsigurare(resultSet.getBoolean("asigurare"));
                 pacient.setEmail(resultSet.getString("email"));
+                pacient.setAdresa(resultSet.getString("adresa"));
                 pacient.setNr_tel(resultSet.getString("nr_tel"));
-
                 pacientiList.add(pacient);
             }
             return pacientiList;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return null;
     }
-
     public Pacient getPacient(int pacientId) {
         try {
             String sql = "SELECT * from pacient WHERE Id = ?";
@@ -51,7 +45,6 @@ public class PacientRepository {
             if(resultSet.next()) {
                 Pacient pacient = new Pacient();
                 Timestamp dataNasteri = resultSet.getTimestamp("data_nasterii");
-
                 pacient.setNume(resultSet.getString("nume"));
                 pacient.setPrenume(resultSet.getString("prenume"));
                 pacient.setCnp(resultSet.getString("cnp"));
@@ -61,6 +54,7 @@ public class PacientRepository {
                 pacient.setNr_card(resultSet.getString("nr_card"));
                 pacient.setAsigurare(resultSet.getBoolean("asigurare"));
                 pacient.setEmail(resultSet.getString("email"));
+                pacient.setAdresa(resultSet.getString("adresa"));
                 pacient.setNr_tel(resultSet.getString("nr_tel"));
                 return pacient;
             }
@@ -69,11 +63,10 @@ public class PacientRepository {
         }
         return null;
     }
-
     public void addPacient(Pacient pacient) {
         try {
             String sql = "INSERT INTO pacient (Nume, Prenume, CNP, Sex, Data_nasterii, Grupa_sanguina, Nr_card," +
-                         "Asigurare, Email, Nr_tel) VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    "Asigurare, Email, Nr_tel) VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, pacient.getNume());
             preparedStatement.setString(2, pacient.getPrenume());
@@ -90,7 +83,6 @@ public class PacientRepository {
             e.printStackTrace();
         }
     }
-
     public void deletePacient(int pacientId) {
         try {
             String sql = "DELETE pacient FROM pacient WHERE Id = ?";
