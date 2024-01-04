@@ -1,5 +1,7 @@
 package com.example.proiectingineriaprogramelor.controllers;
 
+import com.example.proiectingineriaprogramelor.AppState;
+import com.example.proiectingineriaprogramelor.models.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -11,6 +13,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class HomeController implements Initializable {
+    User currentUser = AppState.getInstance().getCurrentUser();
     @FXML
     private VBox heroVBox;
     @FXML
@@ -29,5 +32,11 @@ public class HomeController implements Initializable {
         );
 
         heroVBox.setBackground(new Background(bgImageHeroVBox));
+
+        if(Objects.equals(currentUser.getRol(), "doctor")) {
+            welcomeMsg.setText("Bine ai revenit, Dr. " + currentUser.getNume() + " " + currentUser.getPrenume() + "!");
+        } else if(Objects.equals(currentUser.getRol(), "asistent")) {
+            welcomeMsg.setText("Bine ai revenit, Asist. " + currentUser.getNume() + " " + currentUser.getPrenume() + "!");
+        }
     }
 }

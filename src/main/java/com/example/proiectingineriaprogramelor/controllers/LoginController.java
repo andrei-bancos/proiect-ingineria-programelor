@@ -1,6 +1,7 @@
 package com.example.proiectingineriaprogramelor.controllers;
 
-import com.example.proiectingineriaprogramelor.PasswordManager;
+import com.example.proiectingineriaprogramelor.AppState;
+import com.example.proiectingineriaprogramelor.models.User;
 import com.example.proiectingineriaprogramelor.repositories.UserRepository;
 import com.example.proiectingineriaprogramelor.screens.LayoutScreen;
 import javafx.fxml.FXML;
@@ -63,24 +64,19 @@ public class LoginController implements Initializable {
         if(Objects.equals(emailAddressField.getText().trim(), "")
            || Objects.equals(passwordField.getText().trim(), "")) {
             error.setText("Introduceti datele cerute");
-            return;
-        }
-        else
-        {
+        } else {
             UserRepository userRepository = new UserRepository();
-            int user_id = userRepository.checkUser(Email);
-            if(user_id >= 0){
-                PasswordManager passwordManager = new PasswordManager();
-                String HashParola = passwordManager.encryptSHA256(Parola);
-                if(userRepository.checkPassword(HashParola,user_id)){
-                    // get current stage
-                    Scene scene = login.getScene();
-                    Stage currentStage = (Stage) scene.getWindow();
+            User user = userRepository.checkLoginData(Email, Parola);
+            if(user != null) {
+                AppState.getInstance().setCurrentUser(user);
 
-                    // show home screen
-                    LayoutScreen layoutScreen = new LayoutScreen(currentStage);
-                    layoutScreen.show();
-                }
+                // get current stage
+                Scene scene = login.getScene();
+                Stage currentStage = (Stage) scene.getWindow();
+
+                // show home screen
+                LayoutScreen layoutScreen = new LayoutScreen(currentStage);
+                layoutScreen.show();
             } else error.setText("Datele introduse sunt gresite!");
         }
     }

@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Hyperlink?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox fx:id="containerVBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="796.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proiectingineriaprogramelor.controllers.LayoutController">
+<VBox fx:id="containerVBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="796.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proiectingineriaprogramelor.controllers.LayoutController">
     <children>
         <HBox alignment="CENTER_LEFT" maxHeight="100.0" minHeight="100.0" prefHeight="100.0" spacing="20.0" style="-fx-background-color: #fff;">
             <children>
@@ -48,7 +45,7 @@
                 <Region prefHeight="100.0" HBox.hgrow="ALWAYS" />
                 <VBox alignment="CENTER_RIGHT">
                     <children>
-                        <Label text="Dr. [nume]">
+                        <Label fx:id="currentUserLabel" text="Dr. [nume]">
                             <font>
                                 <Font size="16.0" />
                             </font></Label>

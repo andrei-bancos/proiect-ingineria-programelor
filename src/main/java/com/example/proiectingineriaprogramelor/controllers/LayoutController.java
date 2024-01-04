@@ -1,6 +1,8 @@
 package com.example.proiectingineriaprogramelor.controllers;
 
+import com.example.proiectingineriaprogramelor.AppState;
 import com.example.proiectingineriaprogramelor.MainApplication;
+import com.example.proiectingineriaprogramelor.models.User;
 import com.example.proiectingineriaprogramelor.screens.LoginScreen;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -33,6 +34,8 @@ public class LayoutController implements Initializable {
     private Label programariLabel;
     @FXML
     private Label setariLabel;
+    @FXML
+    private Label currentUserLabel;
 
     private Label selectedNavLabel;
     private Parent currentContent;
@@ -58,6 +61,9 @@ public class LayoutController implements Initializable {
             containerVBox.setVgrow(homeContent, Priority.ALWAYS);
             containerVBox.setVgrow(settingsContent, Priority.ALWAYS);
             containerVBox.setVgrow(pacientContent, Priority.ALWAYS);
+
+            User currentUser = AppState.getInstance().getCurrentUser();
+            currentUserLabel.setText("Dr. " + currentUser.getNume() + " " + currentUser.getPrenume());
 
             containerVBox.getChildren().add(currentContent);
         } catch (Exception exception) {

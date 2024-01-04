@@ -10,16 +10,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class UserRepository {
     private final DatabaseConnection db = DatabaseConnection.getInstance();
     private final Connection connection = db.getConnection();
 
-    public User getUser(int userId) {
+    public User getUser(String email) {
         try {
-            String sql = " SELECT * FROM users WHERE Id = ? ";
+            String sql = " SELECT * FROM users WHERE Email = ? ";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, userId);
+            preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next()) {
                 User user = new User();
@@ -27,6 +28,7 @@ public class UserRepository {
                 user.setPrenume(resultSet.getString("prenume"));
                 user.setCnp(resultSet.getString("cnp"));
                 user.setEmail(resultSet.getString("email"));
+                user.setParola(resultSet.getString("parola"));
                 user.setNrTel(resultSet.getString("nr_tel"));
                 user.setRol(resultSet.getString("rol"));
                 user.setAdresa(resultSet.getString("adresa"));
@@ -37,6 +39,7 @@ public class UserRepository {
         }
         return null;
     }
+
     public int checkUser(String Email) {
         try {
             String sql = "SELECT * FROM users WHERE Email = ?";
@@ -52,12 +55,12 @@ public class UserRepository {
         return -1;
     }
 
-    public boolean checkPassword(String Parola, int Id) {
+    public boolean checkPassword(String parola, String email) {
         try {
-            String sql = "SELECT * FROM users WHERE Parola = ? and Id = ? ";
+            String sql = "SELECT * FROM users WHERE Parola = ? and email = ? ";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, Parola);
-            preparedStatement.setInt(2, Id);
+            preparedStatement.setString(1, parola);
+            preparedStatement.setString(2, email);
             ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next()) {
                 return true;
@@ -66,6 +69,15 @@ public class UserRepository {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public User checkLoginData(String email, String password) {
+        User user = getUser(email);
+        String hashPassword = PasswordManager.encryptSHA256(password);
+        if(user != null && Objects.equals(user.getParola(), hashPassword)) {
+            return user;
+        }
+        return null;
     }
 
     public List<User> getAllUsers() {
