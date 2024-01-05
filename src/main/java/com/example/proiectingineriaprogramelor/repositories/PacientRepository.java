@@ -66,7 +66,7 @@ public class PacientRepository {
     public void addPacient(Pacient pacient) {
         try {
             String sql = "INSERT INTO pacient (Nume, Prenume, CNP, Sex, Data_nasterii, Grupa_sanguina, Nr_card," +
-                    "Asigurare, Email, Nr_tel) VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    "Asigurare, Email, Adresa, Nr_tel) VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, pacient.getNume());
             preparedStatement.setString(2, pacient.getPrenume());
@@ -77,17 +77,18 @@ public class PacientRepository {
             preparedStatement.setString(7, pacient.getNr_card());
             preparedStatement.setBoolean(8, pacient.isAsigurare());
             preparedStatement.setString(9, pacient.getEmail());
-            preparedStatement.setString(10, pacient.getNr_tel());
+            preparedStatement.setString(10, pacient.getAdresa());
+            preparedStatement.setString(11, pacient.getNr_tel());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    public void deletePacient(int pacientId) {
+    public void deletePacient(String email) {
         try {
-            String sql = "DELETE pacient FROM pacient WHERE Id = ?";
+            String sql = "DELETE pacient FROM pacient WHERE email = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, pacientId);
+            preparedStatement.setString(1, email);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

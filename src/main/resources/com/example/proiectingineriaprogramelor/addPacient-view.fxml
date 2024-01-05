@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefWidth="429.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proiectingineriaprogramelor.controllers.addPacientController">
+    <children>
+        <Label text="Adăugare Pacient">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+            <VBox.margin>
+                <Insets bottom="30.0" />
+            </VBox.margin>
+        </Label>
+        <HBox spacing="30.0">
+            <children>
+                <VBox spacing="15.0">
+                    <children>
+                        <TextField fx:id="cnpField" promptText="CNP">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </TextField>
+                        <TextField fx:id="nameField" promptText="Nume">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </TextField>
+                        <TextField fx:id="prenumeField" promptText="Prenume">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </TextField>
+                        <TextField fx:id="sexField" promptText="Sex">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </TextField>
+                        <DatePicker fx:id="dataNasteriPicker" editable="false" />
+                        <CheckBox fx:id="asiguratCheckBox" mnemonicParsing="false" text="Asigurat" />
+                    </children>
+                </VBox>
+                <VBox spacing="15.0">
+                    <children>
+                        <TextField fx:id="nrCardField" promptText="Numar card">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </TextField>
+                        <TextField fx:id="emailField" promptText="Email">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </TextField>
+                        <TextField fx:id="grupaSanguinaField" promptText="Grupa sanguina">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </TextField>
+                        <TextField fx:id="adresaField" promptText="Adresa">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </TextField>
+                        <TextField fx:id="nrTelField" promptText="Nr telefon">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </TextField>
+                    </children>
+                </VBox>
+            </children>
+            <VBox.margin>
+                <Insets bottom="20.0" />
+            </VBox.margin>
+        </HBox>
+        <Button mnemonicParsing="false" onMouseClicked="#onAddButtonClick" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #111;" text="Adăugare" textFill="WHITE">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Button>
+    </children>
+    <padding>
+        <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
+    </padding>
+</VBox>

@@ -32,6 +32,11 @@
                                 <Font size="14.0" />
                             </font>
                         </Button>
+                        <Button fx:id="reloadBtn" layoutX="354.0" layoutY="10.0" minHeight="30.0" mnemonicParsing="false" onMouseClicked="#reloadTable" prefHeight="30.0" prefWidth="150.0" text="Reload">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Button>
                         <Button fx:id="deleteBtn" minHeight="30.0" mnemonicParsing="false" onMouseClicked="#onDeleteButtonClick" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #fb4545;" text="Șterge" textFill="WHITE">
                             <font>
                                 <Font size="14.0" />

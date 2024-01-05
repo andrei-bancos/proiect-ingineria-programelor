@@ -1,28 +1,22 @@
 package com.example.proiectingineriaprogramelor.controllers;
 
+import com.example.proiectingineriaprogramelor.MainApplication;
 import com.example.proiectingineriaprogramelor.models.Pacient;
 import com.example.proiectingineriaprogramelor.repositories.PacientRepository;
 import javafx.beans.property.ReadOnlyBooleanWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class PacientiController implements Initializable {
-    @FXML
-    private Button addBtn;
-    @FXML
-    private Button editBtn;
-    @FXML
-    private Button deleteBtn;
-
     @FXML
     private TableView<Pacient> tableView;
 
@@ -83,17 +77,40 @@ public class PacientiController implements Initializable {
     }
 
     @FXML
-    protected void onAddButtonClick() {
-        System.out.println("Ai dat click pe add");
+    private void reloadTable() {
+        PacientRepository repositoryPacient = new PacientRepository();
+        List<Pacient> pacientList = repositoryPacient.getPacienti();
+
+        tableView.getItems().clear();
+
+        tableView.getItems().addAll(pacientList);
+    }
+
+    @FXML
+    protected void onAddButtonClick() throws IOException {
+        Dialog<Void> addDialog = new Dialog<>();
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("addPacient-view.fxml"));
+        addDialog.setTitle("Adaugare pacient");
+        addDialog.getDialogPane().setContent(fxmlLoader.load());
+        addDialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+        addDialog.showAndWait();
+        reloadTable();
     }
 
     @FXML
     protected void onEditButtonClick() {
-        System.out.println("Ai dat click pe edit");
+
     }
 
     @FXML
     protected void onDeleteButtonClick() {
-        System.out.println("Ai dat click pe delete");
+        TableView.TableViewSelectionModel<Pacient> selectionModel = tableView.getSelectionModel();
+        Pacient selectedRow = selectionModel.getSelectedItem();
+        PacientRepository pacientRepository = new PacientRepository();
+
+        if (selectedRow != null) {
+            pacientRepository.deletePacient(selectedRow.getEmail());
+            tableView.getItems().remove(selectedRow);
+        }
     }
 }
