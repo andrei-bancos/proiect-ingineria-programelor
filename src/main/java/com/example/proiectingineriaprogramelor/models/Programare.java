@@ -7,7 +7,9 @@ public class Programare {
     private int idPacient;
     private LocalDateTime dataProgramarii;
     private String observatii;
-
+    public void setId(int id) {
+        this.id = id;
+    }
     public int getId() {
         return id;
     }

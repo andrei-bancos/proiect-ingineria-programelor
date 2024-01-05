@@ -1,103 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-
-<ScrollPane style="-fx-focus-color: transparent; -fx-faint-focus-color: transparent;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.util.Callback?>
+<?import com.example.proiectingineriaprogramelor.models.Programare?>
+<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="1000" prefWidth="938.0"
+            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.proiectingineriaprogramelor.controllers.ProgramariController">
     <content>
-        <VBox focusTraversable="true">
+        <VBox alignment="CENTER">
             <children>
+                <Label text="Programari">
+                    <font>
+                        <Font name="System Bold" size="30.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="15.0" />
+                    </VBox.margin>
+                </Label>
 
-                <Label text="Vizualizează Programări">
-                    <font>
-                        <Font name="System Bold" size="23.0" />
-                    </font>
-                    <VBox.margin>
-                        <Insets bottom="20.0" />
-                    </VBox.margin>
-                </Label>
-                <Label text="Detalii Programare">
-                    <font>
-                        <Font name="System Bold" size="20.0" />
-                    </font>
-                    <VBox.margin>
-                        <Insets bottom="15.0" />
-                    </VBox.margin>
-                </Label>
-                <HBox prefHeight="10.0" prefWidth="430.0" spacing="10.0" VBox.vgrow="NEVER">
-                    <children>
-                        <VBox HBox.hgrow="NEVER">
-                            <children>
-                                <Label text="Pacient:">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </Label>
-                                <Label text="Data:">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </Label>
-                                <Label text="Ora:">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </VBox>
-                        <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                            <children>
-                                <Label text="[numePacient]" textFill="#fb4545">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </Label>
-                                <Label text="yyyy-MM-dd" VBox.vgrow="NEVER">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </Label>
-                                <Label layoutX="10.0" layoutY="37.0" text="hh:mm" textFill="#fb4545">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </VBox>
-                    </children>
-                </HBox>
-                <Label layoutX="60.0" layoutY="208.0" text="Schimba Detalii Programare">
-                    <font>
-                        <Font size="20.0" />
-                    </font>
-                    <VBox.margin>
-                        <Insets bottom="15.0" top="20.0" />
-                    </VBox.margin>
-                </Label>
-                <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="300.0" promptText="Noua data/ora programare.." VBox.vgrow="NEVER">
-                    <VBox.margin>
-                        <Insets bottom="15.0" />
-                    </VBox.margin>
-                    <font>
-                        <Font size="18.0" />
-                    </font>
-                </TextField>
-                <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #111;" text="Salvează" textFill="WHITE">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Button>
+                <TableView fx:id="tableView" VBox.vgrow="ALWAYS" prefHeight="400.0">
+                    <columns>
+                        <TableColumn fx:id="idCol" prefWidth="75.0" text="ID" />
+                        <TableColumn fx:id="idPacientCol" prefWidth="75.0" text="ID Pacient" />
+                        <TableColumn fx:id="dataProgramariiCol" prefWidth="150.0" text="Data Programarii" />
+                        <TableColumn fx:id="observatiiCol" prefWidth="300.0" text="Observatii" />
+                    </columns>
+                </TableView>
+
+
+                <VBox alignment="CENTER">
+                    <HBox alignment="CENTER" spacing="20.0">
+                        <children>
+                            <Button fx:id="addBtn" minHeight="30.0" mnemonicParsing="false" onMouseClicked="#onAddButtonClick" prefHeight="30.0" prefWidth="150.0" text="Adăugare">
+                                <font>
+                                    <Font size="14.0" />
+                                </font>
+                            </Button>
+<!--                            <Button fx:id="editBtn" minHeight="30.0" mnemonicParsing="false" onMouseClicked="#onEditButtonClick" prefHeight="30.0" prefWidth="150.0" text="Editare">-->
+<!--                                <font>-->
+<!--                                    <Font size="14.0" />-->
+<!--                                </font>-->
+<!--                            </Button>-->
+                            <Button fx:id="deleteBtn" minHeight="30.0" mnemonicParsing="false" onMouseClicked="#onDeleteButtonClick" prefHeight="30.0" prefWidth="150.0" text="Ștergere">
+                                <font>
+                                    <Font size="14.0" />
+                                </font>
+                            </Button>
+                        </children>
+                        <VBox.margin>
+                            <Insets bottom="15.0" />
+                        </VBox.margin>
+                    </HBox>
+
+                    <!-- Adaugă un nou VBox pentru adăugare -->
+                    <VBox fx:id="addVBox" alignment="CENTER" spacing="10.0" visible="false">
+                        <TextField fx:id="idPacientField" promptText="ID Pacient" />
+                        <TextField fx:id="dataProgramariiField" promptText="Data Programarii" />
+                        <TextField fx:id="observatiiField" promptText="Observatii" />
+
+                        <Button fx:id="saveBtn" minHeight="30.0" mnemonicParsing="false" onMouseClicked="#onSaveButtonClick" prefHeight="30.0" prefWidth="150.0" text="Salvează">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Button>
+                    </VBox>
+
+
+
+<!--                    &lt;!&ndash; Adaugă un nou VBox pentru editare &ndash;&gt;-->
+<!--                    <VBox fx:id="editVBox" alignment="CENTER" spacing="10.0" visible="false">-->
+<!--                        <TextField fx:id="editIdField" promptText="ID" />-->
+<!--                        <TextField fx:id="editIdPacientField" promptText="ID Pacient" />-->
+<!--                        <TextField fx:id="editDataProgramariiField" promptText="Data Programarii" />-->
+<!--                        <TextField fx:id="editObservatiiField" promptText="Observatii" />-->
+
+<!--                        <Button fx:id="updateBtn" minHeight="30.0" mnemonicParsing="false" onMouseClicked="#onUpdateButtonClick" prefHeight="30.0" prefWidth="150.0" text="Actualizează">-->
+<!--                            <font>-->
+<!--                                <Font size="14.0" />-->
+<!--                            </font>-->
+<!--                        </Button>-->
+<!--                    </VBox>-->
+                </VBox>
+
             </children>
-            <padding>
-                <Insets bottom="50.0" left="50.0" right="50.0" top="30.0" />
-            </padding>
         </VBox>
     </content>
+    <padding>
+        <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
+    </padding>
 </ScrollPane>

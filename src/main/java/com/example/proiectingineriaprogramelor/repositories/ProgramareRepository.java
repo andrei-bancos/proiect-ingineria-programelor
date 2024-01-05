@@ -44,11 +44,14 @@ public class ProgramareRepository {
                 Programare programare = new Programare();
                 Timestamp dataProgramari = resultSet.getTimestamp("data_programarii");
 
+                programare.setId(resultSet.getInt("id"));  // Corectează setarea ID-ului
                 programare.setIdPacient(resultSet.getInt("id_pacient"));
                 programare.setDataProgramarii(dataProgramari.toLocalDateTime());
                 programare.setObservatii(resultSet.getString("observatii"));
+                System.out.println("ID Programare: " + programare.getId());
                 programareList.add(programare);
             }
+
             return programareList;
         } catch (SQLException e) {
             e.printStackTrace();
