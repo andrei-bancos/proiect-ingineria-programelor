@@ -94,4 +94,34 @@ public class PacientRepository {
             e.printStackTrace();
         }
     }
+    public void editPacient(Pacient selectedPacient, Pacient pacient){
+        try {
+            String sql = "UPDATE pacient SET Nume = ?, Prenume = ?, CNP = ?, Sex = ?, Data_nasterii = ?, Grupa_sanguina = ?, Nr_card = ?, Email = ?, Adresa = ?, Nr_tel = ? WHERE Nume = ? AND Prenume = ? AND CNP = ? AND Sex = ? AND Data_nasterii = ? AND Grupa_sanguina = ? AND Nr_card = ? AND Adresa = ? AND Email = ? AND Nr_tel = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, pacient.getNume());
+            preparedStatement.setString(2, pacient.getPrenume());
+            preparedStatement.setString(3, pacient.getCnp());
+            preparedStatement.setString(4, pacient.getSex());
+            preparedStatement.setObject(5, pacient.getDataNasteri());
+            preparedStatement.setString(6, pacient.getGrupaSanguina());
+            preparedStatement.setString(7, pacient.getNr_card());
+            preparedStatement.setString(8, pacient.getAdresa());
+            preparedStatement.setString(9, pacient.getEmail());
+            preparedStatement.setString(10,pacient.getNr_tel());
+            preparedStatement.setString(11, selectedPacient.getNume());
+            preparedStatement.setString(12, selectedPacient.getPrenume());
+            preparedStatement.setString(13, selectedPacient.getCnp());
+            preparedStatement.setString(14, selectedPacient.getSex());
+            preparedStatement.setObject(15, selectedPacient.getDataNasteri());
+            preparedStatement.setString(16, selectedPacient.getGrupaSanguina());
+            preparedStatement.setString(17, selectedPacient.getNr_card());
+            preparedStatement.setString(18, selectedPacient.getAdresa());
+            preparedStatement.setString(19, selectedPacient.getEmail());
+            preparedStatement.setString(20,selectedPacient.getNr_tel());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

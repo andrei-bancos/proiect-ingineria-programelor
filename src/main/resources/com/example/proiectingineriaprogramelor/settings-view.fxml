@@ -18,22 +18,6 @@
                   <Insets bottom="20.0" />
                </VBox.margin>
             </Label>
-            <Label text="Preferințe">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="15.0" />
-               </VBox.margin>
-            </Label>
-            <CheckBox mnemonicParsing="false" text="Reține informațile de logare la iesirea din aplicație">
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </CheckBox>
             <Label layoutX="60.0" layoutY="95.0" text="Cont">
                <font>
                   <Font name="System Bold" size="20.0" />
@@ -92,7 +76,7 @@
                   <Insets bottom="15.0" top="20.0" />
                </VBox.margin>
             </Label>
-            <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="300.0" promptText="Adresă de email nouă.." VBox.vgrow="NEVER">
+            <TextField fx:id="textFieldEmail" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="300.0" promptText="Adresă de email nouă.." VBox.vgrow="NEVER">
                <VBox.margin>
                   <Insets bottom="15.0" />
                </VBox.margin>
@@ -100,7 +84,7 @@
                   <Font size="18.0" />
                </font>
             </TextField>
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #111;" text="Salvează" textFill="WHITE">
+            <Button onMouseClicked="#onSaveButtonClick" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #111;" text="Salvează" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>

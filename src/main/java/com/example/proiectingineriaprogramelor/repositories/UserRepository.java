@@ -135,6 +135,17 @@ public class UserRepository {
             e.printStackTrace();
         }
     }
+    public void updateEmail(String oldEmail, String newEmail) {
+        try {
+            String sql = "UPDATE users SET Email = ? WHERE Email = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, newEmail);
+            preparedStatement.setString(2, oldEmail);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void updatePassword(int userId, String newPassword) {
         try {

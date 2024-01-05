@@ -98,7 +98,31 @@ public class PacientiController implements Initializable {
     }
 
     @FXML
-    protected void onEditButtonClick() {
+    protected void onEditButtonClick() throws IOException {
+        TableView.TableViewSelectionModel<Pacient> selectionModel = tableView.getSelectionModel();
+        Pacient selectedRow = selectionModel.getSelectedItem();
+        PacientRepository pacientRepository = new PacientRepository();
+
+        if (selectedRow != null) {
+            Dialog<Void> addDialog = new Dialog<>();
+            FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("editPacient-view.fxml"));
+            addDialog.setTitle("Modificare pacient");
+            addDialog.getDialogPane().setContent(fxmlLoader.load());
+            addDialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+            editPacientController controller = fxmlLoader.getController();
+            controller.selectedPacient = selectedRow;
+            controller.nameField.setText(selectedRow.getNume());
+            controller.prenumeField.setText(selectedRow.getPrenume());
+            controller.cnpField.setText(selectedRow.getCnp());
+            controller.adresaField.setText(selectedRow.getAdresa());
+            controller.emailField.setText(selectedRow.getEmail());
+            controller.nrCardField.setText(selectedRow.getNr_card());
+            controller.nrTelField.setText(selectedRow.getNr_tel());
+            controller.grupaSanguinaField.setText(selectedRow.getGrupaSanguina());
+            controller.sexField.setText(selectedRow.getSex());
+            addDialog.showAndWait();
+            reloadTable();
+        }
 
     }
 
