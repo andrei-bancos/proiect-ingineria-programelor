@@ -1,16 +1,23 @@
 package com.example.proiectingineriaprogramelor.controllers;
 
+import com.example.proiectingineriaprogramelor.models.Pacient;
 import com.example.proiectingineriaprogramelor.models.Programare;
+import com.example.proiectingineriaprogramelor.repositories.PacientRepository;
 import com.example.proiectingineriaprogramelor.repositories.ProgramareRepository;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -19,6 +26,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ProgramariController implements Initializable {
+
     @FXML
     private VBox addVBox;
     @FXML
@@ -196,8 +204,25 @@ public class ProgramariController implements Initializable {
 
 
 
-    @FXML
-    protected void onDeleteButtonClick() {
-        System.out.println("Ai dat click pe delete");
+@FXML
+protected void onDeleteButtonClick() {
+    TableView.TableViewSelectionModel<Programare> selectionModel = tableView.getSelectionModel();
+    Programare selectedRow = selectionModel.getSelectedItem();
+
+    if (selectedRow != null) {
+        ProgramareRepository programareRepository = new ProgramareRepository();
+
+        // Utilizăm ID-ul (sau un alt identificator unic) pentru a identifica în mod unic programarea
+        int programareId = selectedRow.getId();
+
+        // Apelăm metoda de ștergere din baza de date
+        programareRepository.deleteProgramare(programareId);
+
+        // Ștergem rândul din tabel
+        tableView.getItems().remove(selectedRow);
     }
+}
+
+
+
 }

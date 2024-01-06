@@ -174,4 +174,25 @@ public class LayoutController implements Initializable {
             e.printStackTrace();
         }
     }
+    public void activateProgramariButton() {
+        try {
+            containerVBox.getChildren().remove(currentContent);
+
+            FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("VizualizeazaProgramariView.fxml"));
+            Parent vizualizeazaProgramariView = loader.load();
+
+            // Setează controllerul pentru VizualizeazaProgramariView, dacă este necesar
+            // VizualizeazaProgramariController controller = loader.getController();
+            // controller.setSomeData(data); // Dacă aveți nevoie să trimiteți date către controller
+
+            currentContent = vizualizeazaProgramariView;
+            containerVBox.getChildren().add(currentContent);
+
+            changeSelectedNavLabel(programariLabel);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
