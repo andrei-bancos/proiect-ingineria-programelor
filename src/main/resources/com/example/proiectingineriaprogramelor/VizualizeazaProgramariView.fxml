@@ -1,35 +1,82 @@
-package com.example.proiectingineriaprogramelor;
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-        import java.sql.Connection;
-        import java.sql.DriverManager;
-        import java.sql.SQLException;
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.util.Callback?>
+<?import com.example.proiectingineriaprogramelor.models.Programare?>
+<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="1000" prefWidth="938.0"
+            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.proiectingineriaprogramelor.controllers.ProgramariController">
+    <content>
+        <VBox alignment="CENTER">
+            <children>
+                <Label text="Programari">
+                    <font>
+                        <Font name="System Bold" size="30.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="15.0" />
+                    </VBox.margin>
+                </Label>
 
-        public class DatabaseConnection {
-        private static DatabaseConnection instance = null;
-        private Connection connection = null;
+                <TableView fx:id="tableView" VBox.vgrow="ALWAYS" prefHeight="400.0">
+                    <columns>
+                        <TableColumn fx:id="idCol" prefWidth="75.0" text="ID" />
+                        <TableColumn fx:id="namePacientCol" prefWidth="75.0" text="Pacient" />
+                        <TableColumn fx:id="dataProgramariiCol" prefWidth="150.0" text="Data Programarii" />
+                        <TableColumn fx:id="observatiiCol" prefWidth="300.0" text="Observatii" />
+                    </columns>
+                </TableView>
 
-        private DatabaseConnection() {
-        try {
-        Class.forName("com.mysql.cj.jdbc.Driver");
 
-        String url = "jdbc:mysql://localhost:3306/Medical_app";
-        String user = "root";
-        String password = "";
+                <VBox alignment="CENTER">
+                    <HBox alignment="CENTER" spacing="20.0">
+                        <children>
+                            <Button fx:id="addBtn" minHeight="30.0" mnemonicParsing="false" onMouseClicked="#onAddButtonClick" prefHeight="30.0" prefWidth="150.0" text="Adăugare">
+                                <font>
+                                    <Font size="14.0" />
+                                </font>
+                            </Button>
 
-        connection = DriverManager.getConnection(url, user, password);
-        } catch (ClassNotFoundException | SQLException e) {
-        e.printStackTrace();
-        }
-        }
+                            <!--                            <Button fx:id="editBtn" minHeight="30.0" mnemonicParsing="false" onMouseClicked="#onEditButtonClick" prefHeight="30.0" prefWidth="150.0" text="Editare">-->
+                            <!--                                <font>-->
+                            <!--                                    <Font size="14.0" />-->
+                            <!--                                </font>-->
+                            <!--                            </Button>-->
+                            <Button fx:id="deleteBtn" minHeight="30.0" mnemonicParsing="false" onMouseClicked="#onDeleteButtonClick" prefHeight="30.0" prefWidth="150.0" text="Ștergere">
+                                <font>
+                                    <Font size="14.0" />
+                                </font>
+                            </Button>
+                        </children>
+                        <VBox.margin>
+                            <Insets bottom="15.0" />
+                        </VBox.margin>
+                    </HBox>
 
-        public static synchronized DatabaseConnection getInstance() {
-        if (instance == null) {
-        instance = new DatabaseConnection();
-        }
-        return instance;
-        }
+                    <!-- Adaugă un nou VBox pentru adăugare -->
+                    <VBox fx:id="addVBox" alignment="CENTER" spacing="10.0" visible="false">
+                        <!--                        <TextField fx:id="idPacientField" promptText="ID Pacient" />-->
+                        <ComboBox fx:id="nameComboBox" promptText="Pacient" onAction="#handleComboBoxAction"/>
+                        <TextField fx:id="dataProgramariiField" promptText="Data Programarii" />
+                        <TextField fx:id="observatiiField" promptText="Observatii" />
 
-        public Connection getConnection() {
-        return connection;
-        }
-        }
+                        <Button fx:id="saveBtn" minHeight="30.0" mnemonicParsing="false" onMouseClicked="#onSaveButtonClick" prefHeight="30.0" prefWidth="150.0" text="Salvează">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Button>
+                    </VBox>
+
+                </VBox>
+
+            </children>
+        </VBox>
+    </content>
+    <padding>
+        <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
+    </padding>
+</ScrollPane>
