@@ -120,6 +120,8 @@ public class PacientiController implements Initializable {
             controller.nrTelField.setText(selectedRow.getNr_tel());
             controller.grupaSanguinaField.setText(selectedRow.getGrupaSanguina());
             controller.sexField.setText(selectedRow.getSex());
+            controller.dataNasteriPicker.setValue(selectedRow.getDataNasteri().toLocalDate());
+            controller.asiguratCheckBox.setSelected(selectedRow.isAsigurare());
             addDialog.showAndWait();
             reloadTable();
         }

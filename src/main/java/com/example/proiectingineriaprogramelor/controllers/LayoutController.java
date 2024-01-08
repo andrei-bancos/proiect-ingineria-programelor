@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class LayoutController implements Initializable {
@@ -63,7 +64,11 @@ public class LayoutController implements Initializable {
             containerVBox.setVgrow(pacientContent, Priority.ALWAYS);
 
             User currentUser = AppState.getInstance().getCurrentUser();
-            currentUserLabel.setText("Dr. " + currentUser.getNume() + " " + currentUser.getPrenume());
+            if(Objects.equals(currentUser.getRol(), "doctor")) {
+                currentUserLabel.setText("Dr. " + currentUser.getNume() + " " + currentUser.getPrenume());
+            } else {
+                currentUserLabel.setText("Assist. " + currentUser.getNume() + " " + currentUser.getPrenume());
+            }
 
             containerVBox.getChildren().add(currentContent);
         } catch (Exception exception) {

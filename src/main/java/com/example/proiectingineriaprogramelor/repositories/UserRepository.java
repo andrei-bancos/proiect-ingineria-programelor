@@ -40,36 +40,6 @@ public class UserRepository {
         return null;
     }
 
-    public int checkUser(String Email) {
-        try {
-            String sql = "SELECT * FROM users WHERE Email = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, Email);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()) {
-               return Integer.parseInt(resultSet.getString("Id"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return -1;
-    }
-
-    public boolean checkPassword(String parola, String email) {
-        try {
-            String sql = "SELECT * FROM users WHERE Parola = ? and email = ? ";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, parola);
-            preparedStatement.setString(2, email);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()) {
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
 
     public User checkLoginData(String email, String password) {
         User user = getUser(email);
@@ -123,18 +93,6 @@ public class UserRepository {
             e.printStackTrace();
         }
     }
-
-    public void updateEmail(int userId, String newEmail) {
-        try {
-            String sql = "UPDATE users SET Email = ? WHERE Id = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, newEmail);
-            preparedStatement.setInt(2, userId);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
     public void updateEmail(String oldEmail, String newEmail) {
         try {
             String sql = "UPDATE users SET Email = ? WHERE Email = ?";
@@ -147,13 +105,13 @@ public class UserRepository {
         }
     }
 
-    public void updatePassword(int userId, String newPassword) {
+    public void updatePassword(String email, String newPassword) {
         try {
             String hashPassword = PasswordManager.encryptSHA256(newPassword);
-            String sql = "UPDATE users SET Parola = ? WHERE Id = ?";
+            String sql = "UPDATE users SET Parola = ? WHERE Email = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, hashPassword);
-            preparedStatement.setInt(2, userId);
+            preparedStatement.setString(2, email);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

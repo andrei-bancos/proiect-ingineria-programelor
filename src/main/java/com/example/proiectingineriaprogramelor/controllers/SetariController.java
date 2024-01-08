@@ -23,6 +23,8 @@ public class SetariController implements Initializable {
     private Label roleLabel;
     @FXML
     private TextField textFieldEmail;
+    @FXML
+    private TextField textFieldPass;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         nameLabel.setText(currentUser.getNume() + " " + currentUser.getPrenume());
@@ -32,10 +34,18 @@ public class SetariController implements Initializable {
     @FXML
     private void onSaveButtonClick(){
         UserRepository userRepository = new UserRepository();
-        String newEmail = textFieldEmail.getText();
-        String oldEmail = emailLabel.getText();
-        userRepository.updateEmail(oldEmail, newEmail);
-        emailLabel.setText(newEmail);
+        if(!textFieldEmail.getText().isEmpty()) {
+            String newEmail = textFieldEmail.getText();
+            String oldEmail = emailLabel.getText();
+            userRepository.updateEmail(oldEmail, newEmail);
+            emailLabel.setText(newEmail);
+            textFieldEmail.setText("");
+        }
+        if(!textFieldPass.getText().isEmpty()) {
+            userRepository.updatePassword(emailLabel.getText(), textFieldPass.getText());
+            textFieldPass.setText("");
+        }
+
     }
 
 }

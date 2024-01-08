@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<ScrollPane style="-fx-focus-color: transparent; -fx-faint-focus-color: transparent;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proiectingineriaprogramelor.controllers.SetariController">
+<ScrollPane prefHeight="519.0" prefWidth="800.0" style="-fx-focus-color: transparent; -fx-faint-focus-color: transparent;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proiectingineriaprogramelor.controllers.SetariController">
    <content>
-      <VBox focusTraversable="true">
+      <VBox focusTraversable="true" prefHeight="474.0" prefWidth="798.0">
          <children>
             <Label text="Setări aplicație și cont">
                <font>
@@ -84,13 +84,21 @@
                   <Font size="18.0" />
                </font>
             </TextField>
-            <Button onMouseClicked="#onSaveButtonClick" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #111;" text="Salvează" textFill="WHITE">
+            <TextField fx:id="textFieldPass" layoutX="60.0" layoutY="318.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="300.0" promptText="Parolă nouă">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#onSaveButtonClick" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #111;" text="Salvează" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
             </Button>
          </children>
          <padding>

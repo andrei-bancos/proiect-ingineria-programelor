@@ -105,8 +105,8 @@ public class PacientRepository {
             preparedStatement.setObject(5, pacient.getDataNasteri());
             preparedStatement.setString(6, pacient.getGrupaSanguina());
             preparedStatement.setString(7, pacient.getNr_card());
-            preparedStatement.setString(8, pacient.getAdresa());
-            preparedStatement.setString(9, pacient.getEmail());
+            preparedStatement.setString(8, pacient.getEmail());
+            preparedStatement.setString(9, pacient.getAdresa());
             preparedStatement.setString(10,pacient.getNr_tel());
             preparedStatement.setString(11, selectedPacient.getNume());
             preparedStatement.setString(12, selectedPacient.getPrenume());
