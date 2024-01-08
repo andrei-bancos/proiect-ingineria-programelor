@@ -1,6 +1,8 @@
 package com.example.proiectingineriaprogramelor.models;
 
+import com.example.proiectingineriaprogramelor.repositories.PacientRepository;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Programare {
     private int id;
@@ -16,6 +18,15 @@ public class Programare {
 
     public int getIdPacient() {
         return idPacient;
+    }
+
+    public String getPacientName() {
+        PacientRepository pacientRepository = new PacientRepository();
+        Pacient pacient = pacientRepository.getPacient(idPacient);
+        if (Objects.isNull(pacient)) {
+            return "";
+        }
+        return pacient.getNume() + " " + pacient.getPrenume();
     }
 
     public void setIdPacient(int idPacient) {
@@ -38,4 +49,3 @@ public class Programare {
         this.observatii = observatii;
     }
 }
-

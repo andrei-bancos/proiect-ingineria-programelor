@@ -16,6 +16,7 @@ public class PacientRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Pacient pacient = new Pacient();
+                pacient.setId(resultSet.getInt("id"));
                 Timestamp dataNasteri = resultSet.getTimestamp("data_nasterii");
                 pacient.setNume(resultSet.getString("nume"));
                 pacient.setPrenume(resultSet.getString("prenume"));

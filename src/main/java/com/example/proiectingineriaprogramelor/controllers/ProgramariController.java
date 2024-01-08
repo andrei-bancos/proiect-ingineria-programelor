@@ -4,16 +4,17 @@ import com.example.proiectingineriaprogramelor.models.Pacient;
 import com.example.proiectingineriaprogramelor.models.Programare;
 import com.example.proiectingineriaprogramelor.repositories.PacientRepository;
 import com.example.proiectingineriaprogramelor.repositories.ProgramareRepository;
+import java.util.Objects;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -24,6 +25,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.util.StringConverter;
 
 public class ProgramariController implements Initializable {
 
@@ -42,15 +44,17 @@ public class ProgramariController implements Initializable {
 
     @FXML
     private TableColumn<Programare, String> idCol;
+
     @FXML
-    private TableColumn<Programare, String> idPacientCol;
+    private TableColumn<Programare, String> namePacientCol;
+
     @FXML
     private TableColumn<Programare, String> dataProgramariiCol;
     @FXML
     private TableColumn<Programare, String> observatiiCol;
 
     @FXML
-    private TextField idPacientField;  // Adaugă aceste linii
+    private int idPacient;  // Adaugă aceste linii
     @FXML
     private TextField dataProgramariiField;  // Adaugă aceste linii
     @FXML
@@ -71,11 +75,15 @@ public class ProgramariController implements Initializable {
     @FXML
     private VBox editVBox;
 
+    @FXML
+    private ComboBox<Pacient> nameComboBox;
+
     public void initialize(URL url, ResourceBundle resourceBundle) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
         idCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(Integer.toString(cellData.getValue().getId())));
-        idPacientCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(Integer.toString(cellData.getValue().getIdPacient())));
+        namePacientCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getPacientName()));
+
         dataProgramariiCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getDataProgramarii().format(formatter)));
         observatiiCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getObservatii()));
 
@@ -94,6 +102,27 @@ public class ProgramariController implements Initializable {
 
     @FXML
     protected void onAddButtonClick() {
+        PacientRepository pacientRepository = new PacientRepository();
+        ObservableList<Pacient> pacienti = FXCollections.observableArrayList(
+                pacientRepository.getPacienti()
+        );
+
+        // Set data to the ComboBox
+        nameComboBox.setItems(pacienti);
+
+        nameComboBox.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(Pacient pacient) {
+                return pacient.getNume() + " " + pacient.getPrenume();
+            }
+
+            @Override
+            public Pacient fromString(String string) {
+                // You can implement this if needed
+                return null;
+            }
+        });
+
         System.out.println("Ai dat click pe add");
         addVBox.setVisible(!addVBox.isVisible());
     }
@@ -102,24 +131,25 @@ public class ProgramariController implements Initializable {
     private void onSaveButtonClick() {
         try {
             // Obține valorile din câmpurile text
-            String idPacientText = idPacientField.getText();
+//            String idPacientText = idPacientField.getText();
             String dataProgramariiStr = dataProgramariiField.getText();
             String observatii = observatiiField.getText();
+            int idPacientCurent = idPacient;
+
 
             // Verifică dacă toate câmpurile sunt completate
-            if (idPacientText.isEmpty() || dataProgramariiStr.isEmpty() || observatii.isEmpty()) {
+            if (Objects.isNull(idPacientCurent) || dataProgramariiStr.isEmpty() || observatii.isEmpty()) {
                 System.err.println("Toate câmpurile trebuie completate.");
                 // Poți afișa un mesaj de eroare utilizatorului aici, dacă este necesar
                 return;
             }
 
             // Obține valorile convertite
-            int idPacient = Integer.parseInt(idPacientText);
             LocalDateTime dataProgramarii = LocalDateTime.parse(dataProgramariiStr, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
             // Crează o nouă instanță de Programare cu valorile obținute
             Programare newProgramare = new Programare();
-            newProgramare.setIdPacient(idPacient);
+            newProgramare.setIdPacient(idPacientCurent);
             newProgramare.setDataProgramarii(dataProgramarii);
             newProgramare.setObservatii(observatii);
 
@@ -141,7 +171,7 @@ public class ProgramariController implements Initializable {
     }
 
 
-//    @FXML
+    //    @FXML
 //    protected void onEditButtonClick() {
 //        // Obține programarea selectată din tabel
 //        Programare selectedProgramare = tableView.getSelectionModel().getSelectedItem();
@@ -204,25 +234,30 @@ public class ProgramariController implements Initializable {
 
 
 
-@FXML
-protected void onDeleteButtonClick() {
-    TableView.TableViewSelectionModel<Programare> selectionModel = tableView.getSelectionModel();
-    Programare selectedRow = selectionModel.getSelectedItem();
+    @FXML
+    protected void onDeleteButtonClick() {
+        TableView.TableViewSelectionModel<Programare> selectionModel = tableView.getSelectionModel();
+        Programare selectedRow = selectionModel.getSelectedItem();
 
-    if (selectedRow != null) {
-        ProgramareRepository programareRepository = new ProgramareRepository();
+        if (selectedRow != null) {
+            ProgramareRepository programareRepository = new ProgramareRepository();
 
-        // Utilizăm ID-ul (sau un alt identificator unic) pentru a identifica în mod unic programarea
-        int programareId = selectedRow.getId();
+            // Utilizăm ID-ul (sau un alt identificator unic) pentru a identifica în mod unic programarea
+            int programareId = selectedRow.getId();
 
-        // Apelăm metoda de ștergere din baza de date
-        programareRepository.deleteProgramare(programareId);
+            // Apelăm metoda de ștergere din baza de date
+            programareRepository.deleteProgramare(programareId);
 
-        // Ștergem rândul din tabel
-        tableView.getItems().remove(selectedRow);
+            // Ștergem rândul din tabel
+            tableView.getItems().remove(selectedRow);
+        }
     }
-}
 
 
-
+    public void handleComboBoxAction(ActionEvent actionEvent) {
+        Pacient pacient = nameComboBox.getSelectionModel().getSelectedItem();
+        if (pacient != null) {
+            idPacient = pacient.getId();
+        }
+    }
 }
