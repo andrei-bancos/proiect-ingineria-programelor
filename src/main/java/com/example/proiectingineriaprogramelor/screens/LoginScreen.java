@@ -14,6 +14,10 @@ public class LoginScreen {
         this.currentStage = currentStage;
     }
 
+    /**
+     * Incarca si afiseaza fereastra - login
+     * @throws IOException
+     */
     public void show() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 500);

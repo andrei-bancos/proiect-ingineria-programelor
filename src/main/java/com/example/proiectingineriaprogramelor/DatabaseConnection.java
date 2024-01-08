@@ -29,6 +29,10 @@ public class DatabaseConnection {
         return instance;
     }
 
+    /**
+     *
+     * @return Returneaza conexiunea existenta la baza de date
+     */
     public Connection getConnection() {
         return connection;
     }

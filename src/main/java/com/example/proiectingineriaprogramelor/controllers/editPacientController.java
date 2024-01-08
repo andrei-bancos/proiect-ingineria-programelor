@@ -40,6 +40,9 @@ public class editPacientController implements Initializable {
 
     }
 
+    /**
+     * Actualizeaza un pacient in baza de date si inchide fereastra de dialog
+     */
     @FXML
     private void onEditButtonClick() {
         PacientRepository pacientRepository = new PacientRepository();

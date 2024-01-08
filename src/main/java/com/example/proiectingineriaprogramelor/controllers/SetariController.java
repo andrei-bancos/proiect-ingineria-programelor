@@ -31,6 +31,10 @@ public class SetariController implements Initializable {
         emailLabel.setText(currentUser.getEmail());
         roleLabel.setText(currentUser.getRol());
     }
+
+    /**
+     * Modifica emailul sau parola utilizatorului care este conectat
+     */
     @FXML
     private void onSaveButtonClick(){
         UserRepository userRepository = new UserRepository();

@@ -98,6 +98,11 @@ public class LayoutController implements Initializable {
         changeCurrentContent(settingsContent);
         changeSelectedNavLabel(setariLabel);
     }
+
+    /**
+     * Deconecteaza user-ul din aplicatie si il duce la ecranul de login
+     * @throws IOException
+     */
     @FXML
     public void logout() throws IOException {
         Scene currentScene = logoutLink.getScene();

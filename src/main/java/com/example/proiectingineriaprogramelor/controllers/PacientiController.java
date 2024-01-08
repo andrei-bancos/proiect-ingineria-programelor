@@ -76,6 +76,9 @@ public class PacientiController implements Initializable {
         tableView.getItems().addAll(pacientList);
     }
 
+    /**
+     *  Reincarca datele in tabel
+     */
     @FXML
     private void reloadTable() {
         PacientRepository repositoryPacient = new PacientRepository();
@@ -86,6 +89,10 @@ public class PacientiController implements Initializable {
         tableView.getItems().addAll(pacientList);
     }
 
+    /**
+     * Deschide o fereastra de dialog pentru adaugarea unui nou pacient
+     * @throws IOException
+     */
     @FXML
     protected void onAddButtonClick() throws IOException {
         Dialog<Void> addDialog = new Dialog<>();
@@ -97,6 +104,10 @@ public class PacientiController implements Initializable {
         reloadTable();
     }
 
+    /**
+     * Deschide o fereastra de dialog pentru editarea unui pacient existent
+     * @throws IOException
+     */
     @FXML
     protected void onEditButtonClick() throws IOException {
         TableView.TableViewSelectionModel<Pacient> selectionModel = tableView.getSelectionModel();
@@ -128,6 +139,9 @@ public class PacientiController implements Initializable {
 
     }
 
+    /**
+     * Sterge pacientul selectat in tabel din baza de date
+     */
     @FXML
     protected void onDeleteButtonClick() {
         TableView.TableViewSelectionModel<Pacient> selectionModel = tableView.getSelectionModel();

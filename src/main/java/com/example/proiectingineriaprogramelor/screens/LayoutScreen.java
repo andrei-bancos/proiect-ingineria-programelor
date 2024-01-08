@@ -15,6 +15,10 @@ public class LayoutScreen {
         this.currentStage = currentStage;
     }
 
+    /**
+     * Incarca si afiseaza fereastra - layout
+     * @throws IOException
+     */
     public void show() throws IOException {
         FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("layout-view.fxml"));
         Scene layoutScene = new Scene(loader.load(), 800, 500);

@@ -15,10 +15,18 @@ public class AppState {
         return instance;
     }
 
+    /**
+     *
+     * @return Returneaza utilizatorul conectat in aplicatie
+     */
     public User getCurrentUser() {
         return currentUser;
     }
 
+    /**
+     * Seteaza utilizatorul curent care s-a conectat in aplicatie
+     * @param user
+     */
     public void setCurrentUser(User user) {
         this.currentUser = user;
         this.currentUser.setParola("");

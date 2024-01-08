@@ -54,6 +54,10 @@ public class LoginController implements Initializable {
         });
     }
 
+    /**
+     * Verifica datele introduse si daca sunt corecte te autentifica in aplicatie
+     * @throws IOException
+     */
     @FXML
     protected void onLoginButtonClick() throws IOException {
         error.setVisible(true);

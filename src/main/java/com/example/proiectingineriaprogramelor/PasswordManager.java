@@ -2,6 +2,11 @@ package com.example.proiectingineriaprogramelor;
 
 import java.security.MessageDigest;
 public class PasswordManager {
+    /**
+     * Cripteaza parola oferita ca argument
+     * @param plain Parola
+     * @return Returneaza parola criptata
+     */
     public static String encryptSHA256(String plain) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");

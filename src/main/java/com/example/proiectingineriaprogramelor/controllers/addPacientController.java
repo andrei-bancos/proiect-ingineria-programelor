@@ -39,6 +39,9 @@ public class addPacientController implements Initializable {
 
     }
 
+    /**
+     * Adauga un pacient in baza de date si inchide fereastra de dialog
+     */
     @FXML
     private void onAddButtonClick() {
         PacientRepository pacientRepository = new PacientRepository();
